@@ -1,0 +1,142 @@
+{%- set tb = card_context(doc.name) -%}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 10mm 8mm; }
+  .pf-cd { direction: rtl; font-family: "Tajawal","Cairo","Amiri","Traditional Arabic","Segoe UI",Tahoma,Arial,sans-serif; color:#000; font-size:9.5pt; }
+  .pf-cd table { border-collapse: collapse; width:100%; }
+  .pf-cd td, .pf-cd th { border:1px solid #000; padding:2px 5px; }
+  .head-wrap { position:relative; min-height:92px; margin-bottom:6px; }
+  .head-wrap .photo { position:absolute; left:0; top:0; width:78px; height:92px; border:1px solid #000; text-align:center; font-size:8pt; color:#666; }
+  .head-wrap .photo img { width:100%; height:100%; object-fit:cover; }
+  .head-wrap .txt { padding:0 90px; text-align:center; }
+  .head-wrap .inst { font-size:10.5pt; font-weight:bold; line-height:1.7; }
+  .head-wrap .inst img { width:64px; height:64px; display:block; margin:0 auto 2px; }
+  .title { text-align:center; font-size:14pt; font-weight:bold; margin:8px 0; }
+  .info td { font-size:9.5pt; height:24px; }
+  .info .lbl { background:#efefef; font-weight:bold; width:13%; }
+  .sect { text-align:center; font-weight:bold; font-size:11pt; border-top:2px solid #000; border-bottom:2px solid #000; padding:3px; margin:10px 0 6px; }
+  .grid th { background:#efefef; font-size:9pt; text-align:center; }
+  .grid td { text-align:center; font-size:9.5pt; height:22px; }
+  .grid td.name { text-align:right; }
+  .sum td { font-weight:bold; background:#f7f7f7; }
+  .sign { width:100%; margin-top:30px; font-size:9.5pt; }
+  .sign td { border:none; text-align:center; }
+  .sign .line { display:inline-block; border-top:1px dotted #000; min-width:150px; }
+</style>
+</head>
+<body>
+<div class="pf-cd">
+
+  <div class="head-wrap">
+    <div class="photo">
+      {% if tb.student.image %}
+      <img src="{{ tb.student.image }}" alt="">
+      {% else %}
+      <div style="padding-top:32px">الصورة</div>
+      {% endif %}
+    </div>
+    <div class="txt">
+      <div class="inst">
+        <img src="/assets/al_khoms_edu/images/institute_logo.png" alt="">
+        الهيئة الوطنية للتعليم التقني والفني<br>
+        إدارة المعاهد التقنية العليا<br>
+        المعهد العالي للعلوم والتقنية - الخمس
+      </div>
+    </div>
+  </div>
+
+  <div class="title">البطاقة الدراسية للطالب</div>
+
+  <table class="info">
+    <tr>
+      <td class="lbl">اسم الطالب/الطالبة</td>
+      <td colspan="3"><b>{{ tb.student.name | e }}</b></td>
+      <td class="lbl">رقم القيد</td>
+      <td>{{ tb.student.registration_number | e }}</td>
+    </tr>
+    <tr>
+      <td class="lbl">القسم</td>
+      <td>{{ tb.student.department | e }}</td>
+      <td class="lbl">التخصص</td>
+      <td>{{ tb.student.program | e }}</td>
+      <td class="lbl">الشعبة</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="lbl">تاريخ الميلاد</td>
+      <td>{{ tb.student.dob }}</td>
+      <td class="lbl">محل الميلاد</td>
+      <td>{{ tb.student.birth_place | e }}</td>
+      <td class="lbl">الرقم الوطني</td>
+      <td>{{ tb.student.national_id | e }}</td>
+    </tr>
+    <tr>
+      <td class="lbl">تاريخ التسجيل</td>
+      <td>{{ tb.student.enrollment_date }}</td>
+      <td class="lbl">تاريخ التخرج</td>
+      <td>{{ tb.student.graduation_date }}</td>
+      <td class="lbl">التقدير العام</td>
+      <td>{{ tb.result.grade if tb.result.average else "—" }}</td>
+    </tr>
+  </table>
+
+  <div class="sect">كشف نتائج الطالب خلال الفترة الدراسية</div>
+
+  <table class="grid">
+    <thead>
+      <tr>
+        <th style="width:4%">م</th>
+        <th style="width:11%">رمز المقرر</th>
+        <th>اسم المقرر</th>
+        <th style="width:8%">عدد الوحدات</th>
+        <th style="width:11%">تقدير الفصل الأول</th>
+        <th style="width:11%">تقدير الفصل الثاني</th>
+        <th style="width:8%">المجموع</th>
+        <th style="width:11%">التقدير</th>
+        <th style="width:8%">النقاط</th>
+        <th style="width:10%">ملاحظات</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in tb.rows %}
+      <tr>
+        <td>{{ r.idx }}</td>
+        <td>{{ r.code | e }}</td>
+        <td class="name">{{ r.name | e }}</td>
+        <td>{{ r.units }}</td>
+        <td>{{ r.p1 }}</td>
+        <td>{{ r.p2 }}</td>
+        <td style="font-weight:bold">{{ r.score }}</td>
+        <td>{{ r.grade }}</td>
+        <td>{{ r.points }}</td>
+        <td>{{ r.note | e }}</td>
+      </tr>
+      {% endfor %}
+      {% if not tb.rows %}
+      <tr><td colspan="10" style="text-align:center; padding:12px">لا توجد نتائج مسجلة لهذا الطالب بعد.</td></tr>
+      {% endif %}
+      <tr class="sum">
+        <td colspan="3">المجموع التراكمي</td>
+        <td>{{ tb.result.units }}</td>
+        <td colspan="2">التقدير العام: {{ tb.result.grade | e }}</td>
+        <td colspan="2">المعدل التراكمي: {{ tb.result.average }}</td>
+        <td>{{ tb.result.points }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="sign">
+    <tr>
+      <td>رئيس القسم<div class="line"></div></td>
+      <td>لجنة الامتحانات<div class="line"></div></td>
+      <td>مدير المعهد<div class="line"></div></td>
+    </tr>
+  </table>
+
+</div>
+</body>
+</html>

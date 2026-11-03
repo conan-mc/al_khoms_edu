@@ -1,0 +1,266 @@
+{
+    "actions": [],
+    "allow_rename": 0,
+    "creation": "2026-10-17 12:00:00.000000",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "section_limits",
+        "pass_score",
+        "max_attempts",
+        "expulsion_attempt",
+        "second_failure_warning",
+        "max_fail_before_repeat",
+        "section_avg",
+        "cum_alert_threshold",
+        "very_weak_threshold",
+        "project_pass_score",
+        "graduation_min_avg",
+        "section_general",
+        "degree_name",
+        "phone_numbers",
+        "logo_size",
+        "student_photo_size",
+        "page_margin",
+        "section_statuses",
+        "attempt_status_available",
+        "attempt_status_approval",
+        "attempt_status_expulsion",
+        "attempt_status_passed",
+        "semester_status_alert",
+        "semester_status_repeat",
+        "semester_status_normal",
+        "promotion_promoted",
+        "promotion_carry",
+        "promotion_repeat",
+        "suspension_status",
+        "section_calendar",
+        "fall_month",
+        "spring_month"
+    ],
+    "fields": [
+        {
+            "fieldname": "section_limits",
+            "fieldtype": "Section Break",
+            "label": "حدود النجاح والمحاولات"
+        },
+        {
+            "default": "50",
+            "description": "م21/م33 — الدرجة الدنيا للنجاح في المادة",
+            "fieldname": "pass_score",
+            "fieldtype": "Float",
+            "in_list_view": 1,
+            "label": "حد النجاح",
+            "non_negative": 1
+        },
+        {
+            "default": "3",
+            "description": "م37 — الحد العادي قبل الحاجة لموافقة الإدارة",
+            "fieldname": "max_attempts",
+            "fieldtype": "Int",
+            "label": "الحد العادي للمحاولات",
+            "non_negative": 1
+        },
+        {
+            "default": "4",
+            "description": "م37 — الرسوب في هذا العدد من المحاولات المتتالية يستوجب الفصل",
+            "fieldname": "expulsion_attempt",
+            "fieldtype": "Int",
+            "label": "حد الفصل (محاولات متتالية)",
+            "non_negative": 1
+        },
+        {
+            "default": "2",
+            "description": "م37 — الرسوب في هذا العدد من المحاولات المتتالية يُصدر تنبيهاً",
+            "fieldname": "second_failure_warning",
+            "fieldtype": "Int",
+            "label": "حد الإنذار (المرة الثانية)",
+            "non_negative": 1
+        },
+        {
+            "default": "2",
+            "description": "م16 — تجاوز هذا العدد من المواد الراسبة يستوجب إعادة الفصل كاملاً",
+            "fieldname": "max_fail_before_repeat",
+            "fieldtype": "Int",
+            "label": "عدد المقررات المسموح بها قبل الإعادة",
+            "non_negative": 1
+        },
+        {
+            "fieldname": "section_avg",
+            "fieldtype": "Section Break",
+            "label": "حدود المعدل والتخرج"
+        },
+        {
+            "default": "55",
+            "description": "م36 — إنذار إذا قل المعدل التراكمي عن هذه النسبة",
+            "fieldname": "cum_alert_threshold",
+            "fieldtype": "Float",
+            "label": "حد الإنذار للمعدل التراكمي",
+            "non_negative": 1
+        },
+        {
+            "default": "35",
+            "description": "م34/م36-ب — إنذار إذا كان التقدير «ضعيف جداً»",
+            "fieldname": "very_weak_threshold",
+            "fieldtype": "Float",
+            "label": "حد «ضعيف جداً»",
+            "non_negative": 1
+        },
+        {
+            "default": "65",
+            "description": "م46 — نسبة النجاح في مشروع التخرج",
+            "fieldname": "project_pass_score",
+            "fieldtype": "Float",
+            "label": "نسبة نجاح مشروع التخرج",
+            "non_negative": 1
+        },
+        {
+            "default": "55",
+            "description": "م43/م44 — الحد الأدنى للمعدل التراكمي للتأهل للتخرج",
+            "fieldname": "graduation_min_avg",
+            "fieldtype": "Float",
+            "label": "الحد الأدنى للتأهل للتخرج",
+            "non_negative": 1
+        },
+        {
+            "fieldname": "section_general",
+            "fieldtype": "Section Break",
+            "label": "معلومات عامة"
+        },
+        {
+            "default": "الدبلوم العالي",
+            "fieldname": "degree_name",
+            "fieldtype": "Data",
+            "label": "اسم الشهادة"
+        },
+        {
+            "fieldname": "phone_numbers",
+            "fieldtype": "Data",
+            "label": "أرقام الهاتف (في القوالب)"
+        },
+        {
+            "default": "78",
+            "description": "عرض وارتفاع الشعار في قوالب الطباعة (بكسل)",
+            "fieldname": "logo_size",
+            "fieldtype": "Int",
+            "label": "أبعاد الشعار (بكسل)",
+            "non_negative": 1
+        },
+        {
+            "default": "78",
+            "description": "عرض وارتفاع صورة الطالب في البطاقة (بكسل)",
+            "fieldname": "student_photo_size",
+            "fieldtype": "Int",
+            "label": "أبعاد صورة الطالب (بكسل)",
+            "non_negative": 1
+        },
+        {
+            "default": "10mm 8mm",
+            "description": "هوامش الصفحة في قوالب الطباعة",
+            "fieldname": "page_margin",
+            "fieldtype": "Data",
+            "label": "هوامش الصفحة"
+        },
+        {
+            "fieldname": "section_statuses",
+            "fieldtype": "Section Break",
+            "label": "حالات النظام"
+        },
+        {
+            "default": "متاح",
+            "fieldname": "attempt_status_available",
+            "fieldtype": "Data",
+            "label": "حالة المحاولة: متاح"
+        },
+        {
+            "default": "تحتاج موافقة",
+            "fieldname": "attempt_status_approval",
+            "fieldtype": "Data",
+            "label": "حالة المحاولة: تحتاج موافقة"
+        },
+        {
+            "default": "فصل",
+            "fieldname": "attempt_status_expulsion",
+            "fieldtype": "Data",
+            "label": "حالة المحاولة: فصل"
+        },
+        {
+            "default": "ناجح",
+            "fieldname": "attempt_status_passed",
+            "fieldtype": "Data",
+            "label": "حالة المحاولة: ناجح"
+        },
+        {
+            "default": "إنذار",
+            "fieldname": "semester_status_alert",
+            "fieldtype": "Data",
+            "label": "حالة الفصل: إنذار"
+        },
+        {
+            "default": "إعادة",
+            "fieldname": "semester_status_repeat",
+            "fieldtype": "Data",
+            "label": "حالة الفصل: إعادة"
+        },
+        {
+            "default": "طبيعي",
+            "fieldname": "semester_status_normal",
+            "fieldtype": "Data",
+            "label": "حالة الفصل: طبيعي"
+        },
+        {
+            "default": "ترقية",
+            "fieldname": "promotion_promoted",
+            "fieldtype": "Data",
+            "label": "قرار الترقية: ترقية"
+        },
+        {
+            "default": "ترقية مع ترحيل",
+            "fieldname": "promotion_carry",
+            "fieldtype": "Data",
+            "label": "قرار الترقية: ترقية مع ترحيل"
+        },
+        {
+            "default": "إعادة فصل",
+            "fieldname": "promotion_repeat",
+            "fieldtype": "Data",
+            "label": "قرار الترقية: إعادة فصل"
+        },
+        {
+            "default": "موقوف",
+            "fieldname": "suspension_status",
+            "fieldtype": "Data",
+            "label": "حالة الوقف"
+        },
+        {
+            "fieldname": "section_calendar",
+            "fieldtype": "Section Break",
+            "label": "تقويم الفصول"
+        },
+        {
+            "default": "09",
+            "description": "رقم الشهر للفصل الخريفي (سبتمبر)",
+            "fieldname": "fall_month",
+            "fieldtype": "Data",
+            "label": "شهر الفصل الخريفي"
+        },
+        {
+            "default": "02",
+            "description": "رقم الشهر للفصل الربيعي (فبراير)",
+            "fieldname": "spring_month",
+            "fieldtype": "Data",
+            "label": "شهر الفصل الربيعي"
+        }
+    ],
+    "issingle": 1,
+    "links": [],
+    "modified": "2026-10-17 12:00:00.000000",
+    "modified_by": "Administrator",
+    "module": "Al Khoms Education Institute",
+    "name": "Academic Rules Settings",
+    "owner": "Administrator",
+    "permissions": [],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
+}

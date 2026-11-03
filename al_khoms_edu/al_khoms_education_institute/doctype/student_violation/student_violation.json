@@ -1,0 +1,227 @@
+{
+ "actions": [],
+ "autoname": "VIO-.YYYY.-.#####",
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "program",
+  "cb_1",
+  "violation_date",
+  "violation_type",
+  "status",
+  "sb_details",
+  "description",
+  "evidence",
+  "sb_committee",
+  "committee",
+  "sb_decision",
+  "decision",
+  "decision_date",
+  "suspension_terms",
+  "cb_2",
+  "penalty_year",
+  "penalty_term",
+  "penalty_end_year",
+  "penalty_end_term",
+  "sb_apply",
+  "applied",
+  "applied_on",
+  "decision_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الطالب",
+   "options": "Student",
+   "reqd": 1
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "fetch_from": "student.student_name",
+   "label": "اسم الطالب",
+   "read_only": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "البرنامج",
+   "options": "Program"
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "violation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "تاريخ المخالفة",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "violation_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "نوع المخالفة",
+   "options": "غش في الامتحان\nانتحال شخصية\nإتلاف ممتلكات المعهد\nاعتداء على عضو هيئة تدريس\nاعتداء على طالب\nإخلال بالنظام\nتزوير مستندات\nأخرى",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "حالة الملف",
+   "options": "مسجلة\nمعتمدة\nمنتهية\nملغاة",
+   "default": "مسجلة"
+  },
+  {
+   "fieldname": "sb_details",
+   "fieldtype": "Section Break",
+   "label": "تفاصيل الواقعة"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "وصف المخالفة",
+   "reqd": 1
+  },
+  {
+   "fieldname": "evidence",
+   "fieldtype": "Attach",
+   "label": "المستندات / الأدلة"
+  },
+  {
+   "fieldname": "sb_committee",
+   "fieldtype": "Section Break",
+   "label": "مجلس التأديب"
+  },
+  {
+   "fieldname": "committee",
+   "fieldtype": "Table",
+   "label": "أعضاء المجلس",
+   "options": "Violation Committee Member"
+  },
+  {
+   "fieldname": "sb_decision",
+   "fieldtype": "Section Break",
+   "label": "القرار والعقوبة"
+  },
+  {
+   "fieldname": "decision",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "العقوبة",
+   "options": "لا جزاء\nإنذار كتابي\nإيقاف عن الدراسة فصل دراسي\nإيقاف عن الدراسة فصلين دراسيين\nإلغاء نتيجة فصل دراسي\nفصل نهائي",
+   "default": "لا جزاء"
+  },
+  {
+   "fieldname": "decision_date",
+   "fieldtype": "Date",
+   "label": "تاريخ القرار"
+  },
+  {
+   "fieldname": "suspension_terms",
+   "fieldtype": "Int",
+   "label": "عدد فصول الإيقاف",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "penalty_year",
+   "fieldtype": "Link",
+   "label": "سنة سريان العقوبة",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "penalty_term",
+   "fieldtype": "Link",
+   "label": "فصل سريان العقوبة",
+   "options": "Academic Term"
+  },
+  {
+   "fieldname": "penalty_end_year",
+   "fieldtype": "Link",
+   "label": "سنة انتهاء العقوبة",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "penalty_end_term",
+   "fieldtype": "Link",
+   "label": "فصل انتهاء العقوبة",
+   "options": "Academic Term"
+  },
+  {
+   "fieldname": "sb_apply",
+   "fieldtype": "Section Break",
+   "label": "التطبيق البرمجي",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "applied",
+   "fieldtype": "Check",
+   "label": "طُبّقت العقوبة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "applied_on",
+   "fieldtype": "Datetime",
+   "label": "تاريخ التطبيق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision_note",
+   "fieldtype": "Small Text",
+   "label": "مبررات القرار"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Student Violation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "student,student_name,violation_type",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "student_name"
+}

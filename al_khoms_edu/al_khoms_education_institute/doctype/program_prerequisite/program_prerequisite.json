@@ -1,0 +1,57 @@
+{
+ "actions": [],
+ "creation": "2026-10-13 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "course",
+  "prerequisite_course",
+  "prerequisite_type",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "المادة",
+   "options": "Course",
+   "reqd": 1,
+   "description": "المادة التي تنطبق عليها المتطلبات"
+  },
+  {
+   "fieldname": "prerequisite_course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "المادة المتطلبة",
+   "options": "Course",
+   "reqd": 1
+  },
+  {
+   "fieldname": "prerequisite_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "نوع المتطلب",
+   "options": "إلزامي\nمقترح",
+   "default": "إلزامي"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Program Prerequisite",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

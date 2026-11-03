@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "course",
+  "source_course_name",
+  "source_units",
+  "source_score",
+  "syllabus_match_percent",
+  "is_equivalent",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "المادة في المعهد",
+   "options": "Course",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_course_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم المادة في المعهد المصدر",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_units",
+   "fieldtype": "Int",
+   "label": "وحدات المادة المصدر"
+  },
+  {
+   "fieldname": "source_score",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "درجة الطالب في المعهد المصدر"
+  },
+  {
+   "fieldname": "syllabus_match_percent",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "نسبة مطابقة المفردات %",
+   "reqd": 1,
+   "description": "لا تُعتمد المعادلة إذا قلت عن 75% (مادة 8)"
+  },
+  {
+   "fieldname": "is_equivalent",
+   "fieldtype": "Check",
+   "default": "1",
+   "label": "معادلة معتمدة"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Equivalency Course",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

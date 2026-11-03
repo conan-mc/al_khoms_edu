@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>التحقق من وثيقة — {{ institute }}</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px 16px; background: #f4f5f7;
+    font-family: "Tajawal","Cairo","Segoe UI",Tahoma,Arial,sans-serif; color: #1f272e;
+  }
+  .card { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden;
+          box-shadow: 0 2px 14px rgba(0,0,0,.08); }
+  .head { background: #1f272e; color: #fff; padding: 18px 20px; text-align: center; }
+  .head h1 { margin: 0; font-size: 16px; font-weight: 700; }
+  .head p { margin: 6px 0 0; font-size: 12px; opacity: .75; }
+  .body { padding: 22px 20px; }
+  .status { text-align: center; padding: 14px; border-radius: 10px; font-weight: 700; font-size: 15px; }
+  .ok { background: #e6f6ec; color: #1a7f45; border: 1px solid #b7e2c6; }
+  .bad { background: #fdeaea; color: #b3261e; border: 1px solid #f3c2c0; }
+  .reason { margin-top: 14px; text-align: center; color: #5b6470; font-size: 13px; line-height: 1.9; }
+  table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+  td { padding: 10px 8px; border-bottom: 1px solid #eceff2; font-size: 14px; }
+  td.k { color: #5b6470; width: 42%; }
+  td.v { font-weight: 700; }
+  .foot { margin-top: 18px; font-size: 11.5px; color: #7b848f; text-align: center; line-height: 1.9; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="head">
+      <h1>{{ institute }}</h1>
+      <p>خدمة التحقق الإلكتروني من الوثائق الرسمية</p>
+    </div>
+    <div class="body">
+      {% if valid %}
+        <div class="status ok">✔ وثيقة صحيحة صادرة عن المعهد</div>
+        <table>
+          <tr><td class="k">اسم الطالب</td><td class="v">{{ student.name }}</td></tr>
+          <tr><td class="k">رقم القيد</td><td class="v">{{ student.registration_number }}</td></tr>
+          <tr><td class="k">البرنامج / التخصص</td><td class="v">{{ student.program }}</td></tr>
+          <tr><td class="k">القسم</td><td class="v">{{ student.department }}</td></tr>
+          <tr><td class="k">المعدل التراكمي</td><td class="v">{{ result.average }}{% if result.grade %} ({{ result.grade }}){% endif %}</td></tr>
+          <tr><td class="k">عدد الفصول المحتسبة</td><td class="v">{{ semesters }}</td></tr>
+          <tr><td class="k">تاريخ التحقق</td><td class="v">{{ verified_on }}</td></tr>
+        </table>
+        <div class="foot">
+          هذه الصفحة تعرض بيانات مختصرة للتحقق فقط، ولا تُعد بديلاً عن كشف الدرجات الرسمي المختوم.
+        </div>
+      {% else %}
+        <div class="status bad">✕ تعذّر التحقق من الوثيقة</div>
+        <div class="reason">{{ reason }}</div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

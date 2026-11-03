@@ -1,0 +1,149 @@
+{
+ "actions": [],
+ "autoname": "EQV-.YYYY.-.#####",
+ "creation": "2026-10-26 00:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "cb_1",
+  "request_date",
+  "status",
+  "source_institute",
+  "source_country",
+  "sb_courses",
+  "courses",
+  "sb_committee",
+  "committee",
+  "sb_result",
+  "decision_date",
+  "decision_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "الطالب",
+   "options": "Student",
+   "reqd": 1
+  },
+  {
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "fetch_from": "student.student_name",
+   "label": "اسم الطالب",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "request_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الطلب",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "الحالة",
+   "options": "مسودة\nقيد الدراسة\nمعتمد\nمرفوض",
+   "default": "مسودة"
+  },
+  {
+   "fieldname": "source_institute",
+   "fieldtype": "Data",
+   "label": "المعهد / الكلية المصدر",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_country",
+   "fieldtype": "Data",
+   "label": "الدولة",
+   "default": "ليبيا"
+  },
+  {
+   "fieldname": "sb_courses",
+   "fieldtype": "Section Break",
+   "label": "المواد المطلوب معادلتها"
+  },
+  {
+   "fieldname": "courses",
+   "fieldtype": "Table",
+   "label": "المواد",
+   "options": "Equivalency Course",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sb_committee",
+   "fieldtype": "Section Break",
+   "label": "لجنة المعادلة (ثلاثة أعضاء)"
+  },
+  {
+   "fieldname": "committee",
+   "fieldtype": "Table",
+   "label": "أعضاء اللجنة",
+   "options": "Equivalency Committee Member"
+  },
+  {
+   "fieldname": "sb_result",
+   "fieldtype": "Section Break",
+   "label": "القرار"
+  },
+  {
+   "fieldname": "decision_date",
+   "fieldtype": "Date",
+   "label": "تاريخ القرار"
+  },
+  {
+   "fieldname": "decision_note",
+   "fieldtype": "Small Text",
+   "label": "مبررات القرار"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-10-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Equivalency Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Academics User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "search_fields": "student,source_institute",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "student_name"
+}

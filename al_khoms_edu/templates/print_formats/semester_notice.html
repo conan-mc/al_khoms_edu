@@ -1,0 +1,127 @@
+{%- set tb = notice_context(doc.name) -%}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 12mm 10mm; }
+  .pf-nt { direction: rtl; font-family: "Tajawal","Cairo","Amiri","Traditional Arabic","Segoe UI",Tahoma,Arial,sans-serif; color:#000; font-size:10pt; }
+  .pf-nt table { border-collapse: collapse; width:100%; }
+  .pf-nt td, .pf-nt th { border:1px solid #000; padding:3px 6px; }
+  .head { text-align:center; margin-bottom:6px; }
+  .head .inst { font-size:11pt; font-weight:bold; line-height:1.7; }
+  .head img { width:80px; height:80px; margin:2px auto; display:block; }
+  .title { text-align:center; font-size:14pt; font-weight:bold; border:1.5px solid #000; padding:3px; margin:8px auto; width:40%; }
+  .info td { font-size:10pt; }
+  .info .lbl { background:#efefef; font-weight:bold; width:14%; }
+  .grid th { background:#efefef; font-size:10pt; text-align:center; }
+  .grid td { text-align:center; font-size:10.5pt; height:26px; }
+  .grid td.name { text-align:right; }
+  .avg-box { width:35%; margin:10px 0 0 auto; font-size:11pt; font-weight:bold; }
+  .avg-box td { padding:4px 8px; }
+  .avg-box .lbl { background:#efefef; }
+  .sign { margin-top:34px; width:100%; font-size:10pt; }
+  .sign td { border:none; text-align:center; }
+  .sign .line { display:inline-block; border-top:1px dotted #000; min-width:180px; }
+  .note { font-size:9pt; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="pf-nt">
+
+  <div class="head">
+    <div class="inst">
+      الهيئة الوطنية للتعليم التقني والفني<br>
+      إدارة المعاهد التقنية العليا<br>
+      المعهد العالي للعلوم والتقنية - الخمس
+    </div>
+    <img src="/assets/al_khoms_edu/images/institute_logo.png" alt="">
+  </div>
+
+  <div class="title">نموذج إشعار نتيجة</div>
+
+  <table class="info">
+    <tr>
+      <td class="lbl">اسم الطالب/الطالبة</td>
+      <td colspan="3"><b>{{ tb.student.name | e }}</b></td>
+      <td class="lbl">رقم القيد</td>
+      <td>{{ tb.student.registration_number | e }}</td>
+    </tr>
+    <tr>
+      <td class="lbl">القسم</td>
+      <td>{{ tb.student.department | e }}</td>
+      <td class="lbl">التخصص</td>
+      <td>{{ tb.student.program | e }}</td>
+      <td class="lbl">الشعبة</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="lbl">العام الدراسي</td>
+      <td>{{ tb.academic_year | e }}</td>
+      <td class="lbl">الفصل الدراسي</td>
+      <td>{{ tb.season | e }}{% if tb.year %} {{ tb.year | e }}{% endif %}</td>
+      <td class="lbl">الحالة</td>
+      <td>{{ tb.status | e }}</td>
+    </tr>
+  </table>
+
+  <table class="grid" style="margin-top:8px">
+    <thead>
+      <tr>
+        <th style="width:4%">ت</th>
+        <th style="width:12%">رمز المقرر</th>
+        <th>اسم المقرر</th>
+        <th style="width:9%">تمهيدي</th>
+        <th style="width:9%">نهائي</th>
+        <th style="width:9%">المجموع</th>
+        <th style="width:9%">النقاط</th>
+        <th style="width:14%">ملاحظات</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if tb.block %}
+        {% for r in tb.block.rows %}
+        <tr>
+          <td>{{ r.idx }}</td>
+          <td>{{ r.code | e }}</td>
+          <td class="name">{{ r.name | e }}</td>
+          <td>{{ r.semi }}</td>
+          <td>{{ r.fine }}</td>
+          <td style="font-weight:bold">{{ r.total }}</td>
+          <td>{{ r.points }}</td>
+          <td>{{ r.note | e }}</td>
+        </tr>
+        {% endfor %}
+        {% for _ in range(tb.block.rows | length, 5) %}
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        {% endfor %}
+      {% else %}
+        {% for _ in range(5) %}
+        <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+
+  {% if not tb.block %}
+  <div class="note">لا توجد نتائج مسجلة لهذا الفصل — تُعرض القيم أدناه من سجل الفصل.</div>
+  {% endif %}
+
+  <table class="avg-box">
+    <tr>
+      <td class="lbl">المعدل</td>
+      <td style="text-align:center">{{ tb.average }}</td>
+    </tr>
+  </table>
+
+  {% if tb.note %}<div class="note">ملاحظات: {{ tb.note | e }}</div>{% endif %}
+
+  <table class="sign">
+    <tr>
+      <td>الدراسة والامتحانات<div class="line"></div></td>
+    </tr>
+  </table>
+
+</div>
+</body>
+</html>

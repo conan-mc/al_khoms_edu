@@ -1,0 +1,137 @@
+{%- set tb = final_result_context(doc.name) -%}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 12mm 10mm; }
+  .pf-fr { direction: rtl; font-family: "Tajawal","Cairo","Amiri","Traditional Arabic","Segoe UI",Tahoma,Arial,sans-serif; color:#000; font-size:9.5pt; }
+  .pf-fr table { border-collapse: collapse; width:100%; }
+  .pf-fr td, .pf-fr th { border:1px solid #000; padding:2px 5px; }
+  .head { text-align:center; margin-bottom:6px; }
+  .head .inst { font-size:10.5pt; font-weight:bold; line-height:1.7; }
+  .head img { width:74px; height:74px; display:block; margin:0 auto 2px; }
+  .title { text-align:center; font-size:15pt; font-weight:bold; border:2px solid #000; padding:4px; margin:8px auto 12px; width:34%; }
+  .sem-title { text-align:center; font-weight:bold; font-size:10pt; background:#efefef; border:1px solid #000; padding:3px; margin-top:10px; }
+  .sem-block { page-break-inside: avoid; }
+  .grid th { background:#efefef; font-size:9pt; text-align:center; }
+  .grid td { text-align:center; font-size:9.5pt; height:22px; }
+  .grid td.name { text-align:right; }
+  .grid tr.tot td { font-weight:bold; background:#f7f7f7; }
+  .result-box { margin:14px 0 6px; }
+  .result-box td { text-align:center; font-size:10pt; }
+  .result-box .lbl { background:#efefef; font-weight:bold; }
+  .result-box .val { font-size:11.5pt; font-weight:bold; height:26px; }
+  .final-line { margin:6px 2px; font-size:10pt; line-height:1.9; }
+  .sign { width:100%; margin-top:30px; font-size:10pt; }
+  .sign td { border:none; text-align:center; }
+  .sign .line { display:inline-block; border-top:1px dotted #000; min-width:180px; }
+</style>
+</head>
+<body>
+<div class="pf-fr">
+
+  <div class="head">
+    <img src="/assets/al_khoms_edu/images/institute_logo.png" alt="">
+    <div class="inst">
+      الهيئة الوطنية للتعليم التقني والفني<br>
+      إدارة المعاهد التقنية العليا<br>
+      المعهد العالي للعلوم والتقنية - الخمس
+    </div>
+  </div>
+
+  <div class="title">النتيجة</div>
+
+  {% for b in tb.blocks %}
+  <div class="sem-block">
+    <div class="sem-title">
+      الفصل {{ b.index }}: {{ b.label | e }}{% if b.academic_year %} — العام الدراسي {{ b.academic_year | e }}{% endif %}
+    </div>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th style="width:4%">م</th>
+          <th style="width:12%">رمز المقرر</th>
+          <th>اسم المقرر</th>
+          <th style="width:9%">عدد الوحدات</th>
+          <th style="width:9%">تمهيدي</th>
+          <th style="width:9%">نهائي</th>
+          <th style="width:9%">المجموع</th>
+          <th style="width:11%">التقدير</th>
+          <th style="width:12%">ملاحظات</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in b.rows %}
+        <tr>
+          <td>{{ r.idx }}</td>
+          <td>{{ r.code | e }}</td>
+          <td class="name">{{ r.name | e }}</td>
+          <td>{{ r.units | round | int }}</td>
+          <td>{{ r.semi }}</td>
+          <td>{{ r.fine }}</td>
+          <td style="font-weight:bold">{{ r.total }}</td>
+          <td>{{ r.grade }}</td>
+          <td>{{ r.note | e }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="tot">
+          <td colspan="3">المجموع الفصلي</td>
+          <td>{{ b.semester.units }}</td>
+          <td colspan="2">المعدل: {{ b.semester.average }}</td>
+          <td>{{ b.semester.points }}</td>
+          <td>—</td>
+          <td></td>
+        </tr>
+        <tr class="tot">
+          <td colspan="3">المجموع التراكمي</td>
+          <td>{{ b.cumulative.units }}</td>
+          <td colspan="2">المعدل: {{ b.cumulative.average }}</td>
+          <td>{{ b.cumulative.points }}</td>
+          <td>—</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% if loop.index % 2 == 0 and not loop.last %}
+  <div style="page-break-after: always"></div>
+  {% endif %}
+  {% endfor %}
+
+  {% if not tb.blocks %}
+  <table class="grid"><tr><td style="text-align:center; padding:14px">لا توجد نتائج مسجلة لهذا الطالب بعد.</td></tr></table>
+  {% endif %}
+
+  <table class="result-box">
+    <tr>
+      <td class="lbl" style="width:25%">مجموع النقاط الكلية</td>
+      <td class="lbl" style="width:25%">عدد الوحدات الكلية</td>
+      <td class="lbl" style="width:25%">المعدل العام للتخرج</td>
+      <td class="lbl" style="width:25%">التقدير</td>
+    </tr>
+    <tr>
+      <td class="val">{{ tb.result.points }}</td>
+      <td class="val">{{ tb.result.units }}</td>
+      <td class="val">{{ tb.result.average }}</td>
+      <td class="val">{{ tb.result.grade | e }}</td>
+    </tr>
+  </table>
+
+  <div class="final-line">اسم الطالب: <b>{{ tb.student.name | e }}</b></div>
+  <div class="final-line">
+    برنامج درجة ({{ tb.student.degree }}) في: <b>{{ tb.student.department | e }}</b>
+    &nbsp;&nbsp; شعبة: <b>{{ tb.student.program | e }}</b>
+  </div>
+  <div class="final-line">جميع متطلبات التخرج: {{ "مستوفاة" if tb.result.average else "—" }}</div>
+
+  <table class="sign">
+    <tr>
+      <td>رئيس القسم<div class="line"></div></td>
+      <td>التوقيع والختم<div class="line"></div></td>
+    </tr>
+  </table>
+
+</div>
+</body>
+</html>

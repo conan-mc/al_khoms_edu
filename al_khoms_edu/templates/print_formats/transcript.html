@@ -1,0 +1,169 @@
+{%- set tb = transcript_context(doc.name) -%}
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 10mm 8mm; }
+  .pf-tr { direction: rtl; font-family: "Tajawal","Cairo","Amiri","Traditional Arabic","Segoe UI",Tahoma,Arial,sans-serif; color:#000; font-size:9.5pt; }
+  .pf-tr table { border-collapse: collapse; width:100%; }
+  .pf-tr td, .pf-tr th { border:1px solid #000; padding:2px 5px; }
+  .pf-tr .noborder td { border:none; padding:1px 3px; }
+  .head { vertical-align:middle; width:100%; border:1px solid #000; margin-bottom:4px; }
+  .head .en { direction:ltr; text-align:center; font-size:7.5pt; line-height:1.5; }
+  .head .en b { font-size:9pt; }
+  .head .ar { text-align:center; font-size:8.5pt; line-height:1.6; font-weight:bold; }
+  .head .logo { text-align:center; width:90px; }
+  .head .logo img { width:78px; height:78px; }
+  .title { text-align:center; font-size:14pt; font-weight:bold; border:1.5px solid #000; padding:3px; margin:6px auto; width:32%; }
+  .meta { font-size:8.5pt; margin:2px 2px 6px; }
+  .meta .right { float:right; }
+  .meta .left { float:left; }
+  .para { text-align:justify; font-size:9.5pt; line-height:1.8; margin:6px 2px 10px; }
+  .sem-title { text-align:center; font-weight:bold; font-size:10pt; background:#efefef; border:1px solid #000; padding:3px; margin-top:8px; }
+  .sem-block { page-break-inside: avoid; }
+  .grid th { background:#efefef; font-size:9pt; text-align:center; }
+  .grid td { text-align:center; font-size:9.5pt; }
+  .grid td.name { text-align:right; }
+  .grid tr.tot td { font-weight:bold; background:#f7f7f7; }
+  .signs { width:100%; margin-top:14px; font-size:9.5pt; }
+  .signs td { border:none; text-align:center; padding-top:26px; }
+  .signs .line { display:inline-block; border-top:1px dotted #000; min-width:150px; }
+  .footer { margin-top:10px; border-top:1px solid #000; font-size:8pt; text-align:center; padding-top:2px; }
+  .qrbox { width:100%; border:1px solid #000; margin-top:10px; }
+  .qrbox td { border:none; padding:4px 6px; vertical-align:middle; }
+  .qrbox td.qr { width:26mm; text-align:center; }
+  .qrbox img.verify-qr { width:24mm; height:24mm; }
+  .qrbox .qrtext { font-size:8pt; line-height:1.8; }
+  .qrbox .qrurl { font-size:6.5pt; direction:ltr; unicode-bidi:embed; word-break:break-all; color:#333; }
+</style>
+</head>
+<body>
+<div class="pf-tr">
+
+  <table class="head">
+    <tr>
+      <td class="en">
+        <b>State of Libya</b><br>
+        Government of National Unity<br>
+        Ministry of Technical and Vocational Education<br>
+        Ministry of Higher Education and Scientific Research<br>
+        Management of Higher Technical Institutes<br>
+        <b>Higher Institute of Science and Technology - Al-khoms</b>
+      </td>
+      <td class="logo"><img src="/assets/al_khoms_edu/images/institute_logo.png" alt=""></td>
+      <td class="ar">
+        دولة ليبيا<br>
+        حكومة الوحدة الوطنية<br>
+        وزارة التعليم التقني والفني<br>
+        وزارة التعليم العالي والبحث العلمي<br>
+        إدارة المعاهد التقنية الفنية العليا<br>
+        <b>المعهد العالي للعلوم والتقنية - الخمس</b>
+      </td>
+    </tr>
+  </table>
+
+  <div class="title">كشف درجات</div>
+
+  <div class="meta">
+    <span class="right">التاريخ: {{ tb.today }}</span>
+    <span class="left">رقم الإضبارة: {{ tb.student.registration_number | e }}</span>
+  </div>
+  <div style="clear:both"></div>
+
+  <p class="para">
+    رئيس المعهد العالي للعلوم والتقنية - الخمس يمنح الطالب/ <b>{{ tb.student.name | e }}</b>
+    {%- if tb.student.dob %} — تاريخ ومكان الميلاد: {{ tb.student.dob }}{% if tb.student.birth_place %} - {{ tb.student.birth_place | e }}{% endif %}{% endif %}
+    {%- if tb.student.national_id %} — الرقم الوطني: {{ tb.student.national_id | e }}{% endif %}.
+    قد حصل على شهادة <b>{{ tb.student.degree }}</b>
+    {%- if tb.student.department %} ({{ tb.student.department | e }}){% endif %}
+    {%- if tb.student.program %} - الشعبة: {{ tb.student.program | e }}{% endif %}
+    بعد أن أتم بنجاح جميع متطلبات التخرج والمقررات الدراسية المقررة، بمعدل تراكمي
+    {% if tb.result.average %}<b>{{ tb.result.average }}%</b> وتقدير <b>{{ tb.result.grade | e }}</b>.{% else %}—{% endif %}
+  </p>
+
+  {% for b in tb.blocks %}
+  <div class="sem-block">
+    <div class="sem-title">
+      الفصل {{ b.index }}: {{ b.label | e }}{% if b.academic_year %} — العام الدراسي {{ b.academic_year | e }}{% endif %}
+    </div>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th style="width:4%">ت</th>
+          <th style="width:11%">رمز المقرر</th>
+          <th>اسم المقرر</th>
+          <th style="width:8%">الوحدات</th>
+          <th style="width:9%">الدرجة</th>
+          <th style="width:11%">التقدير</th>
+          <th style="width:9%">النقاط</th>
+          <th style="width:12%">ملاحظات</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in b.rows %}
+        <tr>
+          <td>{{ r.idx }}</td>
+          <td>{{ r.code | e }}</td>
+          <td class="name">{{ r.name | e }}</td>
+          <td>{{ r.units | round | int }}</td>
+          <td style="font-weight:bold">{{ r.total }}</td>
+          <td>{{ r.grade }}</td>
+          <td>{{ r.points }}</td>
+          <td>{{ r.note | e }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="tot">
+          <td colspan="3">المجموع الفصلي</td>
+          <td>{{ b.semester.units }}</td>
+          <td>{{ b.semester.average }}</td>
+          <td>—</td>
+          <td>{{ b.semester.points }}</td>
+          <td></td>
+        </tr>
+        <tr class="tot">
+          <td colspan="3">المجموع التراكمي</td>
+          <td>{{ b.cumulative.units }}</td>
+          <td>{{ b.cumulative.average }}</td>
+          <td>{{ tb.result.grade if loop.last else "—" }}</td>
+          <td>{{ b.cumulative.points }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% if loop.index % 2 == 0 and not loop.last %}
+  <div style="page-break-after: always"></div>
+  {% endif %}
+  {% endfor %}
+
+  {% if not tb.blocks %}
+  <table class="grid"><tr><td style="text-align:center; padding:14px">لا توجد نتائج مسجلة لهذا الطالب بعد.</td></tr></table>
+  {% endif %}
+
+  <table class="signs">
+    <tr>
+      <td>رئيس قسم الخريجين<div class="line"></div></td>
+      <td>المسجل العام<div class="line"></div></td>
+      <td>مدير عام المعهد<div class="line"></div></td>
+    </tr>
+  </table>
+
+  <table class="qrbox">
+    <tr>
+      <td class="qr">{{ verify_qr(doc.name, tb.student.program) }}</td>
+      <td class="qrtext">
+        <b>للتحقق من صحة هذه الوثيقة</b><br>
+        امسح رمز الاستجابة السريعة (QR) بكاميرا الهاتف لعرض بيانات التحقق الإلكتروني.<br>
+        <span class="qrurl">{{ verify_url(doc.name, tb.student.program) }}</span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="footer">
+    www.khoms-khc.edu.ly &nbsp;|&nbsp; E-mail: khoms-hvc@yahoo.com &nbsp;|&nbsp; هاتف: 0532621629 - 0532626540
+  </div>
+
+</div>
+</body>
+</html>

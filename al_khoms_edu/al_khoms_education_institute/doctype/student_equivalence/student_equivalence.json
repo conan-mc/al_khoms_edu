@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "EQUIV-.#####",
+ "creation": "2026-10-13 00:00:00.000000",
+ "description": "معادلة المقررات المنقولة: طالب منقول من جامعة أو معهد آخر — تُعادل مقررات دراسته السابقة وتُدرج في الفصل المكافئ وفق اللائحة.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "course",
+  "grade",
+  "academic_year",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_list_view": false,
+   "in_standard_filter": 1,
+   "label": "الطالب",
+   "options": "Student",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "student.student_name",
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم الطالب",
+   "read_only": 1
+  },
+  {
+   "fieldname": "course",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "المادة",
+   "options": "Course",
+   "reqd": 1
+  },
+  {
+   "fieldname": "grade",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "الدرجة المعادلة",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_list_view": true,
+   "label": "السنة الدراسية",
+   "options": "Academic Year"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "in_list_view": false,
+   "label": "ملاحظات"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-10-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Student Equivalence",
+ "naming_rule": "Naming Series",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Academics User",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "student_name"
+}

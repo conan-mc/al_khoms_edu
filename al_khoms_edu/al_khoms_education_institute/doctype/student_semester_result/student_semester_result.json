@@ -1,0 +1,177 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "SSR-.#####",
+ "creation": "2026-10-13 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "student",
+  "student_name",
+  "program",
+  "academic_year",
+  "academic_term",
+  "cb_1",
+  "semester_units",
+  "semester_points",
+  "semester_average",
+  "cb_2",
+  "cumulative_units",
+  "cumulative_points",
+  "cumulative_average",
+  "accomplished_units",
+  "status",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "student",
+   "fieldtype": "Link",
+   "in_list_view": false,
+   "in_standard_filter": 1,
+   "label": "الطالب",
+   "options": "Student",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "student.student_name",
+   "fieldname": "student_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "اسم الطالب",
+   "read_only": 1
+  },
+  {
+   "fieldname": "program",
+   "fieldtype": "Link",
+   "in_list_view": false,
+   "in_standard_filter": 1,
+   "label": "التخصص / البرنامج",
+   "options": "Program",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_year",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "السنة الدراسية",
+   "options": "Academic Year",
+   "reqd": 1
+  },
+  {
+   "fieldname": "academic_term",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الفصل الدراسي",
+   "options": "Academic Term",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb_1",
+   "fieldtype": "Column Break",
+   "in_list_view": false
+  },
+  {
+   "fieldname": "semester_units",
+   "fieldtype": "Float",
+   "in_list_view": false,
+   "label": "الوحدات الفصلية",
+   "precision": "1"
+  },
+  {
+   "fieldname": "semester_points",
+   "fieldtype": "Float",
+   "in_list_view": false,
+   "label": "النقاط الفصلية",
+   "precision": "2"
+  },
+  {
+   "fieldname": "semester_average",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "المعدل الفصلي",
+   "precision": "2"
+  },
+  {
+   "fieldname": "cb_2",
+   "fieldtype": "Column Break",
+   "in_list_view": false
+  },
+  {
+   "fieldname": "cumulative_units",
+   "fieldtype": "Float",
+   "in_list_view": false,
+   "label": "الوحدات التراكمية",
+   "precision": "1"
+  },
+  {
+   "fieldname": "cumulative_points",
+   "fieldtype": "Float",
+   "in_list_view": false,
+   "label": "النقاط التراكمية",
+   "precision": "2"
+  },
+  {
+   "fieldname": "cumulative_average",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "المعدل التراكمي",
+   "precision": "2"
+  },
+  {
+   "fieldname": "accomplished_units",
+   "fieldtype": "Float",
+   "in_list_view": false,
+   "label": "الوحدات المنجزة",
+   "precision": "1"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "الحالة الأكاديمية",
+   "options": "طبيعي\nإنذار\nإعادة"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "in_list_view": false,
+   "label": "ملاحظات"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-10-13 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Al Khoms Education Institute",
+ "name": "Student Semester Result",
+ "naming_rule": "Naming Series",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "Academics User",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "System Manager",
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "student_name"
+}

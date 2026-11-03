@@ -1,0 +1,30 @@
+[project]
+name = "al_khoms_edu"
+version = "0.0.1"
+authors = [
+    { name = "Al Khoms Higher Institute of Science and Technology", email = "info@alkhoms.edu.ly" }
+]
+description = "Customizations for the Higher Institute of Science and Technology — Al Khoms"
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "MIT" }
+dynamic = []
+dependencies = [
+    # توليد رمز QR لكشف الدرجات (al_khoms_edu.verification)
+    "PyQRCode>=1.2.1",
+    "pypng>=0.20220715.0",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0,<17.0.0"
+erpnext = ">=16.0.0,<17.0.0"
+education = ">=16.0.0,<17.0.0"
+pos_next = ">=2.0.0,<3.0.0"

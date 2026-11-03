@@ -1,0 +1,13 @@
+*.pyc
+*.pyo
+*.egg-info
+.DS_Store
+.electron
+*.swp
+tags
+node_modules
+__pycache__
+.pytest_cache
+.eslintcache
+logs/
+*.log
