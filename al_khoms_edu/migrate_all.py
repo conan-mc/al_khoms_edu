@@ -27,8 +27,6 @@ from al_khoms_edu.access_migrate_academic import (
 	CRITERIA,
 	GRADE_SCALE,
 	MAX_SCORE,
-	_ensure_assessment_plan,
-	_ensure_student_group,
 	grade_letter,
 	normalize_year,
 	term_name_for,

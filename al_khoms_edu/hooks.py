@@ -75,7 +75,7 @@ fixtures = [
 		"filters": [["role", "not in", ["POSNext Cashier", "Nexus POS Manager"]]],
 	},
 	{"dt": "Property Setter"},
-	{"dt": "Print Format", "filters": [["standard", "=", 0]]},
+	{"dt": "Print Format", "filters": [["standard", "=", "No"]]},
 ]
 
 # Scheduled Tasks
